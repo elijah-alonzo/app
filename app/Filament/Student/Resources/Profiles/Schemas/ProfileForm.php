@@ -17,7 +17,11 @@ class ProfileForm
         return $schema
             ->components([
                 // Modern Profile Header Section
-                Section::make('')
+                Section::make('Account Information')
+                    ->description('Manage your account details and profile information')
+                    ->columnSpanFull()
+                    ->collapsible()
+                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -87,6 +91,9 @@ class ProfileForm
                 // Security Section - Modern Card Style
                 Section::make('Security & Privacy')
                     ->description('Update your password to keep your account secure')
+                    ->columnSpanFull()
+                    ->collapsible()
+                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         Grid::make(1)
                             ->schema([
@@ -130,7 +137,7 @@ class ProfileForm
                             ])
                     ])
                     ->collapsible()
-                    ->collapsed(false)
+                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->extraAttributes([
                         'class' => 'mt-6'
                     ]),

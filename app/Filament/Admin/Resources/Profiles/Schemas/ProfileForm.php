@@ -17,8 +17,10 @@ class ProfileForm
             ->components([
                 // Account Information Section
                 Section::make('Account Information')
-                    ->description('Manage your account details and organization settings')
+                    ->description('Manage your account details and profile information')
                     ->columnSpanFull()
+                    ->collapsible()
+                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         // Full Name - Full Width
                         TextInput::make('name')
@@ -81,6 +83,8 @@ class ProfileForm
                 Section::make('Security & Privacy')
                     ->description('Update your password to keep your account secure')
                     ->columnSpanFull()
+                    ->collapsible()
+                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         Grid::make(1)
                             ->schema([
