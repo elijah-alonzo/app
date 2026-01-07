@@ -53,16 +53,10 @@ class ProfileResource extends Resource
         return ProfileForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return ProfileInfolist::configure($schema);
-    }
-
     public static function getPages(): array
     {
         return [
             'index' => IndexProfile::route('/'),
-            'view' => ViewProfile::route('/{record}'),
             'edit' => EditProfile::route('/{record}/edit'),
         ];
     }

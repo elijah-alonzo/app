@@ -11,7 +11,7 @@ class IndexProfile extends Page
 
     public function mount(): void
     {
-        // Redirect to the current user's profile view
-        $this->redirect(route('filament.admin.resources.profiles.view', ['record' => auth()->id()]));
+        // Redirect directly to the current user's profile edit page
+        $this->redirect(ProfileResource::getUrl('edit', ['record' => auth()->id()]));
     }
 }

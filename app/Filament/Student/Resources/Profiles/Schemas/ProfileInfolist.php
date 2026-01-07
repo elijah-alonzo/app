@@ -76,7 +76,7 @@ class ProfileInfolist
                 ->label('')
                 ->hiddenLabel()
                 ->schema([
-                    Grid::make(1)
+                    Section::make('')
                         ->schema([
                             ImageEntry::make('organization.logo')
                                 ->label('')
@@ -111,20 +111,19 @@ class ProfileInfolist
                                 ->extraAttributes(['style' => 'font-size: 14px;']),
                         ])
                         ->extraAttributes([
-                            'style' => 'border-radius: 12px; padding: 24px; text-align: center; transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.1);',
-                            'class' => 'bg-white dark:bg-gray-700'
+                            'style' => 'text-align: center;'
                         ])
                 ])
                 ->contained(false)
                 ->grid([
                     'default' => 1,
-                    'sm' => 2,
-                    'md' => 3,
-                    'lg' => 4,
+                    'sm' => 1,
+                    'md' => 2,
+                    'lg' => 3,
                     'xl' => 4,
                 ])
                 ->extraAttributes([
-                    'style' => 'display: grid; gap: 24px; grid-template-columns: repeat(4, 1fr); justify-items: stretch; width: 100%;'
+                    'style' => 'gap: 24px;'
                 ])
                 ->columnSpanFull(),
         ]);

@@ -12,44 +12,54 @@ class ProfileInfolist
     public static function configure(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Profile Information')
+            // Account Information Section - Modern Layout
+            Section::make('Account Information')
+                ->description('Your account details and organization settings')
+                ->columnSpanFull()
                 ->schema([
-                    Grid::make(2)
-                        ->schema([
-                            TextEntry::make('name')
-                                ->label('Full Name'),
-                            TextEntry::make('email')
-                                ->label('Email Address')
-                                ->copyable(),
-                            TextEntry::make('school_number')
-                                ->label('School Number')
-                                ->badge()
-                                ->color('gray'),
-                            TextEntry::make('department.name')
-                                ->label('Department')
-                                ->badge()
-                                ->color('info')
-                                ->default('Not Assigned'),
-                        ]),
-                ]),
+                    // Full Name - Full Width
+                    TextEntry::make('name')
+                        ->label('Name')
+                        ->size('lg')
+                        ->weight('bold')
+                        ->color('primary')
+                        ->icon('heroicon-m-user')
+                        ->columnSpanFull(),
 
-            Section::make('Account Details')
-                ->schema([
-                    Grid::make(2)
-                        ->schema([
-                            TextEntry::make('created_at')
-                                ->label('Account Created')
-                                ->dateTime('M j, Y g:i A'),
-                            TextEntry::make('updated_at')
-                                ->label('Last Updated')
-                                ->dateTime('M j, Y g:i A'),
-                        ]),
+                    // School ID Number - Full Width
+                    TextEntry::make('school_number')
+                        ->label('School ID Number')
+                        ->badge()
+                        ->color('gray')
+                        ->icon('heroicon-m-identification')
+                        ->columnSpanFull(),
+
+                    // Email Address - Full Width
+                    TextEntry::make('email')
+                        ->label('Email address')
+                        ->copyable()
+                        ->icon('heroicon-m-envelope')
+                        ->color('info')
+                        ->columnSpanFull(),
+
+                    // Roles - Full Width
                     TextEntry::make('roles.name')
-                        ->label('User Roles')
+                        ->label('Roles')
                         ->badge()
                         ->separator(', ')
+                        ->color('success')
+                        ->icon('heroicon-m-user-group')
+                        ->default('No roles assigned')
+                        ->columnSpanFull(),
+
+                    // Organization - Full Width
+                    TextEntry::make('organization.name')
+                        ->label('Organization')
+                        ->badge()
                         ->color('primary')
-                        ->default('No roles assigned'),
+                        ->icon('heroicon-m-building-office')
+                        ->default('Not Assigned')
+                        ->columnSpanFull(),
                 ]),
         ]);
     }

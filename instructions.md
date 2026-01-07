@@ -76,9 +76,9 @@ Key Tables
 * certificates - Generated certificates tracking
 
 # TASKS #
-1. Remove the certificate resource in the student panel
-2. Make the student panel navigation into a top navigation
-3. Please update the Profile resource layout of the student panel to mimic the layout of the portfolio-layout.png 
+1. The participated organizations should be stacked on top of each other in mobile view. What it currently looks like is pasted in the chat
+2. Update the admin panel profile section to match the layout of the student panel section. But update it a bit to match the user's credentials.
+3. 
 
 # NOTES #
 1. Make sure to use only filament. No using custom blade files.
