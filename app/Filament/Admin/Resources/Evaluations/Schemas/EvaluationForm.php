@@ -30,8 +30,17 @@ class EvaluationForm
                         TextInput::make('year')
                             ->label('Academic Year')
                             ->required()
-                            ->numeric()
-                            ->default(date('Y')),
+                            ->placeholder('e.g., 2024-2025')
+                            ->helperText('Enter academic year range (e.g., 2024-2025)')
+                            ->default(date('Y') . '-' . (date('Y') + 1))
+                            ->unique(
+                                table: 'evaluations',
+                                column: 'year',
+                                ignoreRecord: true,
+                                modifyRuleUsing: function ($rule, $get) {
+                                    return $rule->where('organization_id', $get('organization_id'));
+                                }
+                            ),
                         Hidden::make('user_id')
                             ->default(auth()->id()),
                     ])

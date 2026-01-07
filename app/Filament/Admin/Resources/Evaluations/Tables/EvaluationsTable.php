@@ -54,7 +54,6 @@ class EvaluationsTable
                             TextColumn::make('year')
                                 ->badge()
                                 ->color('primary')
-                                ->formatStateUsing(fn ($state) => $state . '-' . ($state + 1))
                                 ->grow(false),
 
                             TextColumn::make('students_count')
@@ -77,13 +76,7 @@ class EvaluationsTable
                 SelectFilter::make('year')
                     ->label('Academic Year')
                     ->options(function () {
-                        $currentYear = date('Y');
-                        $years = [];
-                        for ($i = $currentYear - 5; $i <= $currentYear + 2; $i++) {
-                            $nextYear = $i + 1;
-                            $years[$i] = "$i-$nextYear";
-                        }
-                        return $years;
+                        return \App\Models\Evaluation::distinct()->pluck('year', 'year')->toArray();
                     }),
             ])
             ->recordActions([

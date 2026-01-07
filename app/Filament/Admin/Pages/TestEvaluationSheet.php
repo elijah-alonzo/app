@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Admin\Resources\Evaluations\Schemas;
+namespace App\Filament\Admin\Pages;
 
 use Filament\Forms;
 use Filament\Forms\Components\Section;

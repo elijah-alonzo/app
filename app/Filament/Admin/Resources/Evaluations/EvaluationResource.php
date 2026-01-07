@@ -46,7 +46,6 @@ class EvaluationResource extends Resource
                                 ->inlineLabel(),
                             TextEntry::make('year')
                                 ->label('Academic Year:')
-                                ->formatStateUsing(fn ($state) => $state . '-' . ($state + 1))
                                 ->inlineLabel(),
                         ])->columnSpan(4),
                     ]),

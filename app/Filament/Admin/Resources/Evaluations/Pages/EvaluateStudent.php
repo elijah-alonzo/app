@@ -16,14 +16,14 @@ use Illuminate\Contracts\Support\Htmlable;
 
 /**
  * Evaluate Student Page
- * 
+ *
  * Provides dynamic evaluation forms based on evaluator type (adviser, peer, self).
  * Organizes questions by domain and strand for better user experience.
  */
 class EvaluateStudent extends Page implements HasForms
 {
     use InteractsWithForms, HandlesEvaluationForms;
-    
+
     protected static string $resource = EvaluationResource::class;
     protected string $view = 'filament.admin.resources.evaluations.pages.EvaluationSheet';
 
@@ -82,7 +82,7 @@ class EvaluateStudent extends Page implements HasForms
     public function getSubheading(): string|Htmlable|null
     {
         $orgName = $this->evaluation->organization->name ?? 'Organization';
-        $yearRange = $this->evaluation->year . '-' . ($this->evaluation->year + 1);
+        $yearRange = $this->evaluation->year;
         return "Organization: {$orgName}{$this->evaluation->name} ({$yearRange})";
     }
 

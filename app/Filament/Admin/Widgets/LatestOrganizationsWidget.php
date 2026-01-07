@@ -25,19 +25,23 @@ class LatestOrganizationsWidget extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(Organization::query()->withCount('evaluations')->orderBy('evaluations_count', 'desc')->limit(3))
+            ->query(Organization::query()->withCount('evaluations')->orderBy('evaluations_count', 'desc')->limit(4))
             ->columns([
                 ImageColumn::make('logo')
                     ->label('Logo')
                     ->rounded()
-                    ->height(48)
-                    ->width(48)
-                    ->extraAttributes(['class' => 'ring-1 ring-gray-100 dark:ring-gray-800']),
+                    // smaller logo for compact rows
+                    ->height(32)
+                    ->width(32)
+                    ->extraAttributes(['class' => 'ring-1 ring-gray-100 dark:ring-gray-800 px-1 py-1']),
 
                 TextColumn::make('name')
                     ->label('Name')
                     ->weight(FontWeight::SemiBold)
-                    ->limit(30),
+                    // do not truncate name; allow wrapping and show full name on hover
+                    ->wrap()
+                    ->extraAttributes(['class' => 'text-sm px-2 py-1'])
+                    ->tooltip(fn ($record) => $record->name),
 
                 BadgeColumn::make('evaluations_count')
                     ->label('Evaluations')
@@ -48,7 +52,7 @@ class LatestOrganizationsWidget extends BaseWidget
                         'success' => fn($state): bool => (int) $state > 3,
                     ])
                     ->formatStateUsing(fn($state) => (int) $state)
-                    ->extraAttributes(['class' => 'font-medium']),
+                    ->extraAttributes(['class' => 'text-sm px-2 py-1 font-medium']),
             ])
             ->defaultSort('evaluations_count', 'desc')
             ->bulkActions([])

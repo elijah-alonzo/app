@@ -52,11 +52,7 @@ class RanksTable
                         ->searchable(),
                     TextColumn::make('evaluation.year')
                         ->label('Evaluation Year')
-                        ->formatStateUsing(function ($state) {
-                            if (!$state) return 'N/A';
-                            $nextYear = $state + 1;
-                            return "{$state}-{$nextYear}";
-                        }),
+                        ->searchable(),
                 ]),
                 ColumnGroup::make('Results', [
                     TextColumn::make('final_score')

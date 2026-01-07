@@ -27,7 +27,7 @@ class Evaluation extends Model
     ];
 
     protected $casts = [
-        'year' => 'integer',
+        'year' => 'string',
     ];
 
     /**

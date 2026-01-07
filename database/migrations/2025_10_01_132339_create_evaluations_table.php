@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->year('year'); // Academic year
+            $table->string('year'); // Academic year range (e.g., 2024-2025)
             $table->foreignId('organization_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            // Ensure unique year per organization
+            $table->unique(['organization_id', 'year']);
         });
     }
 

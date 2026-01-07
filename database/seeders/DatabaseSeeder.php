@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // Seed roles, permissions, departments and admin user
         $this->call([
             RolePermissionSeeder::class,
+            PresentationSeeder::class,
         ]);
 
         // Create single admin user

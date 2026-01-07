@@ -1,5 +1,81 @@
-Task Overview: Add widgets to admin dashboard. Visit this link to use it as your reference: https://filamentphp.com/docs/4.x/widgets/stats-overview#!. Avoid using custom widgets.
+# INSTRUCTIONS FOR AI CHATBOT #
+Please read the following and execute exactly what is stated.
 
-Stat Cards: Add three stat cards at the very top. Add one stat card to display the total bumber of accounts in the system (Add the student accounts and user accounts). Add another to display the number of user accounts. And add one more to display student acoounts.
+## Project Overview ##
+A comprehensive student leadership evaluation and portfolio management system built with Laravel 12 and Filament 4, designed for St. Paul University Philippines (SPUP) student government organizations.
 
-Table Widget and Chart Widget: These widgets are located below the stat cards. The table widget must display all organizations in the system. It should display it's logo, name, and number of evaluations created in that organization. The Chart widget should display a chart showing the ranks obtained. Preferably a bar graph
+## Core MVP ##
+### Multi-Panel Architecture ###
+Admin Panel (/admin) - Administrative management interface
+Student Panel (/student) - Student portfolio and evaluation interface
+Dual authentication system (Users for admin, Students for portfolio)
+
+### User Management System ###
+Technical Stack:
+Authentication: Laravel Sanctum + Filament Auth
+Authorization: Spatie Laravel Permission package
+Role-based Access Control: Admin, Student roles
+
+Entities:
+Users (Administrators/Faculty)
+Organization assignment
+School number system
+Email-based authentication
+Students (Evaluated participants)
+E-portfolio capabilities (profile pictures, bio)
+Independent authentication system
+School number integration
+
+### Organization Management ###
+Multi-organizational support for different SPUP departments:
+1. Paulinian Student Government (main)
+2. PSG - SITE (School of IT & Engineering)
+3. PSG - SBAHM (School of Business)
+4. PSG - SNAHS (School of Nursing & Allied Health)
+5. PSG - SASTE (School of Arts, Sciences & Teacher Education)
+Logo and branding per organization
+Hierarchical user assignment
+
+## Comprehensive Evaluation System ##
+Technical Implementation:
+360-degree evaluation model: Self, Peer, and Adviser evaluations
+Weighted scoring algorithm:
+Adviser: 65% (includes length of service)
+Peer: 25%
+Self: 10%
+Dynamic form generation using Filament schemas
+Position-based evaluations (President, VP, Secretary, etc.)
+
+### Advanced Ranking System ###
+Algorithmic Ranking:
+Tier-based classification:
+Gold: ≥2.41 points
+Silver: 1.81-2.40 points
+Bronze: 1.21-1.80 points
+None: <1.21 points
+Automatic rank computation via Eloquent observers
+Real-time dashboard widgets showing rank distributions
+
+
+## TECHNICAL ARCHITECTURE ##
+
+### Backend Stack ###
+* Framework: Laravel 12 (PHP 8.2+)
+* Admin Interface: Filament 4.x
+* Database: MySQL (with comprehensive migrations)
+* Authentication: Multi-guard system
+* Testing: Pest PHP framework
+
+### Database Schema ###
+Key Tables
+* users - Admin/faculty accounts with organization links
+* students - Student accounts with e-portfolio fields
+* evaluations - Year-based evaluation cycles
+* evaluation_scores - Individual question responses with JSON storage
+* ranks - Computed final rankings with breakdown
+* certificates - Generated certificates tracking
+
+# TASKS #
+1. Remove the certificate generation system.
+2. Update the Year field for Evaluations to have a range instead of just the year. Example: 2024-2025. With this, update the fields that uses this field: Rankings Resource, Evaluation resource, Dashboard.
+3. 
