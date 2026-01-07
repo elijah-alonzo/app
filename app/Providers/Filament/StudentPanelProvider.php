@@ -40,6 +40,7 @@ class StudentPanelProvider extends PanelProvider
             ->darkModeBrandLogo(fn () => new HtmlString('<img src="' . asset('images/psgears.png') . '" alt="Paulinian E-Portfolio" style="height:40px;" />'))
             ->brandLogoHeight('36px')
             ->breadcrumbs(false)
+            ->topNavigation()
             ->discoverResources(in: app_path('Filament/Student/Resources'), for: 'App\Filament\Student\Resources')
             ->discoverPages(in: app_path('Filament/Student/Pages'), for: 'App\Filament\Student\Pages')
             ->middleware([

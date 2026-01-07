@@ -76,6 +76,9 @@ Key Tables
 * certificates - Generated certificates tracking
 
 # TASKS #
-1. Remove the certificate generation system.
-2. Update the Year field for Evaluations to have a range instead of just the year. Example: 2024-2025. With this, update the fields that uses this field: Rankings Resource, Evaluation resource, Dashboard.
-3. 
+1. Remove the certificate resource in the student panel
+2. Make the student panel navigation into a top navigation
+3. Please update the Profile resource layout of the student panel to mimic the layout of the portfolio-layout.png 
+
+# NOTES #
+1. Make sure to use only filament. No using custom blade files.
