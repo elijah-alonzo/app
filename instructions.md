@@ -76,8 +76,9 @@ Key Tables
 * certificates - Generated certificates tracking
 
 # TASKS #
-1. When clicking on a student in the student table of the admin panel student resource, it should show the student's portfolio (Similar layout to the profile infolist in the student panel profile resource).
-2. I basically want it to be like that. Example scenario: I want to view a student. I go to students, click on a studnet, I see their portfolio, and there is an edit button if I want to change their details.
+1. Update the create and edit pages to a clean and modern design. Similar to the create and edit of the student and users in the admin panel.
+2. Edit these resources: Create and Edit Evaluations, Organizations, Roles, Permissions.
+3. Make the navbar for admin pannel collapsible
 
 # NOTES #
 1. Make sure to use only filament. No using custom blade files.

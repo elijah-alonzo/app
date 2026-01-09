@@ -29,56 +29,24 @@ class EvaluationResource extends Resource
     {
         return $schema->components([
             Section::make('Evaluation Details')
+                ->description('View evaluation period and organization information')
                 ->schema([
-                    Grid::make(5)->schema([
-                        ImageEntry::make('organization.logo')
-                            ->circular()
-                            ->size(100)
-                            ->hiddenLabel()
-                            ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->organization->name ?? 'Organization') . '&color=7F9CF5&background=EBF4FF')
-                            ->columnSpan(1),
-                        Grid::make(1)->schema([
-                            TextEntry::make('organization.name')
-                                ->hiddenLabel()
-                                ->weight('bold'),
-                            TextEntry::make('user.name')
-                                ->label('Adviser:')
-                                ->inlineLabel(),
-                            TextEntry::make('year')
-                                ->label('Academic Year:')
-                                ->inlineLabel(),
-                        ])->columnSpan(4),
-                    ]),
-                ]),
+                    Grid::make(2)->schema([
+                        TextEntry::make('organization.name')
+                            ->label('Organization')
+                            ->icon('heroicon-m-building-office')
+                            ->weight('semibold'),
 
-            Section::make('Peer Evaluator Details')
-                ->schema([
-                    RepeatableEntry::make('peer_evaluators')
-                        ->label('Nigga')
-                        ->hiddenLabel()
-                        ->state(function ($record) {
-                            return EvaluationPeerEvaluator::where('evaluation_id', $record->id)
-                                ->with('evaluatorStudent')
-                                ->get()
-                                ->groupBy('evaluator_student_id')
-                                ->map(function ($assignments, $evaluatorId) {
-                                    $evaluator = $assignments->first()->evaluatorStudent;
-                                    return [
-                                        'name' => $evaluator ? $evaluator->name : 'Unknown',
-                                        'evaluatee_count' => $assignments->count(),
-                                    ];
-                                })->values()->toArray();
-                        })
-                        ->schema([
-                            Grid::make(2)->schema([
-                                TextEntry::make('name')
-                                    ->label('Evaluator:')
-                                    ->inlineLabel(),
-                                TextEntry::make('evaluatee_count')
-                                    ->label('Evaluatees:')
-                                    ->inlineLabel(),
-                            ]),
-                        ]),
+                        TextEntry::make('year')
+                            ->label('Academic Year')
+                            ->icon('heroicon-m-calendar-days')
+                            ->weight('semibold'),
+                    ]),
+
+                    TextEntry::make('user.name')
+                        ->label('Created by')
+                        ->icon('heroicon-m-user')
+                        ->color('gray'),
                 ]),
         ]);
     }

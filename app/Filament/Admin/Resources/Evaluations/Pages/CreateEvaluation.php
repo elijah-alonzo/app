@@ -7,12 +7,19 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateEvaluation extends CreateRecord
 {
     protected static string $resource = EvaluationResource::class;
+
     public static function shouldCreateInModal(): bool
     {
         return true;
     }
-        public function getSubheading(): ?string
+
+    protected function getRedirectUrl(): string
     {
-        return 'Fill out the form to create a new evaluation.';
+        return $this->getResource()::getUrl('index');
+    }
+
+    public function getSubheading(): ?string
+    {
+        return 'Fill out the form to create a new evaluation in the system.';
     }
 }

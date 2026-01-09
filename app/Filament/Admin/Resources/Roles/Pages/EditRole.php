@@ -22,4 +22,9 @@ class EditRole extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    public function getSubheading(): ?string
+    {
+        return 'Fill out the form to update the role information.';
+    }
 }

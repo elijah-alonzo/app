@@ -22,8 +22,8 @@ class EditEvaluation extends EditRecord
         ];
     }
 
-        public function getSubheading(): ?string
+    public function getSubheading(): ?string
     {
-        return 'Fill out the form to edit the evaluation.';
+        return 'Fill out the form to update the evaluation information.';
     }
 }
