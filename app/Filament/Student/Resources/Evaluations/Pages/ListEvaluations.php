@@ -66,7 +66,6 @@ class ListEvaluations extends Page
                 'evaluation_id' => $evaluation->id,
                 'organization_id' => $evaluation->organization->id,
                 'organization_name' => $evaluation->organization->name,
-                'department_name' => $evaluation->organization->department->name ?? 'No Department',
                 'target_name' => 'Yourself',
                 'status' => $selfEvaluation ? 'Completed' : 'Pending',
             ]);
@@ -91,7 +90,6 @@ class ListEvaluations extends Page
                 'evaluation_id' => $assignment->evaluation_id,
                 'organization_id' => $assignment->evaluation->organization->id,
                 'organization_name' => $assignment->evaluation->organization->name,
-                'department_name' => $assignment->evaluation->organization->department->name ?? 'No Department',
                 'target_id' => $assignment->evaluatee_student_id,
                 'target_name' => $assignment->evaluateeStudent->name,
                 'status' => $peerEvaluation ? 'Completed' : 'Pending',

@@ -73,6 +73,17 @@ class StudentForm
                                             ->extraAttributes([
                                                 'style' => 'font-size: 16px;'
                                             ]),
+
+                                        TextInput::make('school_number')
+                                            ->label('School Number')
+                                            ->required()
+                                            ->maxLength(50)
+                                            ->prefixIcon('heroicon-m-identification')
+                                            ->unique(ignoreRecord: true)
+                                            ->placeholder('Enter student ID number')
+                                            ->extraAttributes([
+                                                'style' => 'font-size: 16px;'
+                                            ]),
                                     ])
                                     ->columnSpan(1),
                             ]),

@@ -20,10 +20,10 @@ class EditStudent extends EditRecord
 
     protected function getRedirectUrl(): string
     {
-        return $this->getResource()::getUrl('index');
+        return $this->getResource()::getUrl('view', ['record' => $this->getRecord()]);
     }
 
-    
+
     public function getSubheading(): ?string
     {
         return 'Fill out the form to update the student information.';

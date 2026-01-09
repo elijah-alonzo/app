@@ -5,7 +5,9 @@ namespace App\Filament\Admin\Resources\Students;
 use App\Filament\Admin\Resources\Students\Pages\CreateStudent;
 use App\Filament\Admin\Resources\Students\Pages\EditStudent;
 use App\Filament\Admin\Resources\Students\Pages\ListStudents;
+use App\Filament\Admin\Resources\Students\Pages\ViewStudent;
 use App\Filament\Admin\Resources\Students\Schemas\StudentForm;
+use App\Filament\Admin\Resources\Students\Schemas\StudentInfolist;
 use App\Filament\Admin\Resources\Students\Tables\StudentsTable;
 use App\Models\Student;
 use BackedEnum;
@@ -33,7 +35,7 @@ class StudentResource extends Resource
     public static function canAccess(): bool
     {
         // Allow access for admin role or users with manage-students permission
-        return auth()->user()?->hasRole('Admin') || 
+        return auth()->user()?->hasRole('Admin') ||
                auth()->user()?->can('manage students') ?? false;
     }
 
@@ -43,6 +45,11 @@ class StudentResource extends Resource
     }
 
     public static function canCreate(): bool
+    {
+        return static::canAccess();
+    }
+
+    public static function canView($record): bool
     {
         return static::canAccess();
     }
@@ -66,6 +73,14 @@ class StudentResource extends Resource
     }
 
     /**
+     * Configure the infolist schema for viewing student portfolios.
+     */
+    public static function infolist(Schema $schema): Schema
+    {
+        return StudentInfolist::configure($schema);
+    }
+
+    /**
      * Configure the table for listing students.
      */
     public static function table(Table $table): Table
@@ -81,6 +96,7 @@ class StudentResource extends Resource
         return [
             'index' => ListStudents::route('/'),
             'create' => CreateStudent::route('/create'),
+            'view' => ViewStudent::route('/{record}'),
             'edit' => EditStudent::route('/{record}/edit'),
         ];
     }

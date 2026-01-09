@@ -22,7 +22,7 @@ class EvaluationDetailsInfolist
                                 ->width(64)
                                 ->alignCenter(),
                             \Filament\Infolists\Components\TextEntry::make('name')->label('Evaluation Name'),
-                            \Filament\Infolists\Components\TextEntry::make('department.name')->label('Department'),
+                            \Filament\Infolists\Components\TextEntry::make('organization.name')->label('Organization'),
                             \Filament\Infolists\Components\TextEntry::make('year')->label('Academic Year'),
                             \Filament\Infolists\Components\TextEntry::make('description')->label('Description'),
                         ]),

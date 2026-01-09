@@ -76,9 +76,8 @@ Key Tables
 * certificates - Generated certificates tracking
 
 # TASKS #
-1. The participated organizations should be stacked on top of each other in mobile view. What it currently looks like is pasted in the chat
-2. Update the admin panel profile section to match the layout of the student panel section. But update it a bit to match the user's credentials.
-3. 
+1. When clicking on a student in the student table of the admin panel student resource, it should show the student's portfolio (Similar layout to the profile infolist in the student panel profile resource).
+2. I basically want it to be like that. Example scenario: I want to view a student. I go to students, click on a studnet, I see their portfolio, and there is an edit button if I want to change their details.
 
 # NOTES #
 1. Make sure to use only filament. No using custom blade files.

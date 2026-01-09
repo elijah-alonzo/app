@@ -56,7 +56,7 @@ class StudentsTable
                     ->label('Registered'),
             ])
             ->recordUrl(
-                fn (Student $record): string => route('filament.admin.resources.students.edit', $record),
+                fn (Student $record): string => route('filament.admin.resources.students.view', $record),
             )
             ->emptyStateHeading('No students yet')
             ->emptyStateDescription('Students will appear here once they are registered.');

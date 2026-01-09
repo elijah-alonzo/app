@@ -28,9 +28,10 @@ class PeerEvaluationsTable extends BaseWidget
                     ->label('Organization')
                     ->weight(FontWeight::SemiBold),
                     
-                TextColumn::make('organization.department.name')
-                    ->label('Department')
-                    ->default('No Department'),
+                TextColumn::make('organization.name')
+                    ->label('Organization')
+                    ->searchable()
+                    ->sortable(),
                     
                 TextColumn::make('evaluateeStudent.name')
                     ->label('Student to Evaluate')
@@ -64,7 +65,7 @@ class PeerEvaluationsTable extends BaseWidget
         return EvaluationPeerEvaluator::query()
             ->where('evaluator_student_id', $studentId)
             ->with([
-                'evaluation.organization.department',
+                'evaluation.organization',
                 'evaluateeStudent'
             ]);
     }
