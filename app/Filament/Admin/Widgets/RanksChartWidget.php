@@ -9,7 +9,9 @@ use Illuminate\Database\QueryException;
 
 class RanksChartWidget extends BaseWidget
 {
-    protected ?string $heading = 'Ranks Overview';
+    protected ?string $heading = 'Rank Distribution';
+
+    protected ?string $subheading = 'Student performance rankings';
 
     // Half-width on medium+ screens so it can sit side-by-side with the organizations table
     protected int | string | array $columnSpan = [
@@ -19,6 +21,8 @@ class RanksChartWidget extends BaseWidget
 
     // Prefer a bar chart
     protected ?string $chartType = 'bar';
+
+    protected ?string $maxHeight = '300px';
 
     protected function getData(): array
     {
@@ -41,22 +45,31 @@ class RanksChartWidget extends BaseWidget
         $values = array_values($grouped);
 
         $backgrounds = array_map(fn($l) => match($l) {
-            'gold' => 'rgba(245, 158, 11, 0.9)',
-            'silver' => 'rgba(148, 163, 184, 0.9)',
-            'bronze' => 'rgba(249, 115, 22, 0.9)',
-            default => 'rgba(148, 163, 184, 0.6)',
+            'gold' => 'rgba(251, 191, 36, 0.8)',
+            'silver' => 'rgba(156, 163, 175, 0.8)',
+            'bronze' => 'rgba(245, 101, 101, 0.8)',
+            default => 'rgba(107, 114, 128, 0.6)',
+        }, $labels);
+
+        $borderColors = array_map(fn($l) => match($l) {
+            'gold' => 'rgb(251, 191, 36)',
+            'silver' => 'rgb(156, 163, 175)',
+            'bronze' => 'rgb(245, 101, 101)',
+            default => 'rgb(107, 114, 128)',
         }, $labels);
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Ranks',
+                    'label' => 'Students',
                     'data' => $values,
                     'backgroundColor' => $backgrounds,
-                    'borderColor' => array_map(fn($c) => str_replace('0.9', '1', $c), $backgrounds),
-                    'borderWidth' => 1,
-                    'borderRadius' => 6,
-                    'maxBarThickness' => 48,
+                    'borderColor' => $borderColors,
+                    'borderWidth' => 2,
+                    'borderRadius' => 8,
+                    'borderSkipped' => false,
+                    'maxBarThickness' => 40,
+                    'minBarLength' => 2,
                 ],
             ],
             'labels' => array_map(fn($l) => ucfirst((string) $l), $labels),
@@ -71,18 +84,39 @@ class RanksChartWidget extends BaseWidget
                     'tooltip' => [
                         'mode' => 'index',
                         'intersect' => false,
+                        'backgroundColor' => 'rgba(17, 24, 39, 0.9)',
+                        'titleColor' => 'rgb(243, 244, 246)',
+                        'bodyColor' => 'rgb(209, 213, 219)',
+                        'borderColor' => 'rgba(75, 85, 99, 0.2)',
+                        'borderWidth' => 1,
+                        'cornerRadius' => 8,
+                        'displayColors' => true,
                     ],
                 ],
                 'scales' => [
                     'y' => [
                         'beginAtZero' => true,
                         'grid' => [
-                            'color' => 'rgba(15, 23, 42, 0.04)',
+                            'color' => 'rgba(156, 163, 175, 0.1)',
+                            'lineWidth' => 1,
+                        ],
+                        'ticks' => [
+                            'color' => 'rgb(107, 114, 128)',
+                            'font' => [
+                                'size' => 11,
+                            ],
                         ],
                     ],
                     'x' => [
                         'grid' => [
                             'display' => false,
+                        ],
+                        'ticks' => [
+                            'color' => 'rgb(107, 114, 128)',
+                            'font' => [
+                                'size' => 12,
+                                'weight' => 'bold',
+                            ],
                         ],
                     ],
                 ],

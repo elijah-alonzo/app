@@ -16,25 +16,32 @@ class RanksStatsWidget extends BaseWidget
         $gold = Rank::where('rank', 'gold')->count();
         $silver = Rank::where('rank', 'silver')->count();
         $bronze = Rank::where('rank', 'bronze')->count();
+        $total = $gold + $silver + $bronze;
 
         return [
-            Stat::make('Gold', $gold)
-                ->icon('heroicon-s-star')
+            Stat::make('Gold Rank', number_format($gold))
+                ->icon('heroicon-o-trophy')
+                ->color('warning')
                 ->chart($this->generateSparkline($gold))
-                ->chartColor('success') // use Filament theme color
-                ->description($this->generateDescription($this->generateSparkline($gold))),
+                ->chartColor('warning')
+                ->description($this->generateRankDescription($gold, $total, 'top performers'))
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
 
-            Stat::make('Silver', $silver)
-                ->icon('heroicon-s-star')
+            Stat::make('Silver Rank', number_format($silver))
+                ->icon('heroicon-o-star')
+                ->color('gray')
                 ->chart($this->generateSparkline($silver))
-                ->chartColor('gray') // use Filament theme color
-                ->description($this->generateDescription($this->generateSparkline($silver))),
+                ->chartColor('gray')
+                ->description($this->generateRankDescription($silver, $total, 'achievers'))
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
 
-            Stat::make('Bronze', $bronze)
-                ->icon('heroicon-s-star')
+            Stat::make('Bronze Rank', number_format($bronze))
+                ->icon('heroicon-o-academic-cap')
+                ->color('success')
                 ->chart($this->generateSparkline($bronze))
-                ->chartColor('warning') // use Filament theme color
-                ->description($this->generateDescription($this->generateSparkline($bronze))),
+                ->chartColor('success')
+                ->description($this->generateRankDescription($bronze, $total, 'participants'))
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
         ];
     }
 
@@ -67,18 +74,29 @@ class RanksStatsWidget extends BaseWidget
     protected function generateDescription(array $sparkline): string
     {
         $values = array_values($sparkline);
-
         $last = array_pop($values);
         $prev = array_pop($values) ?? 0;
 
         if ($prev === 0) {
-            return 'No previous data';
+            return 'Baseline measurement';
         }
 
         $change = ($last - $prev) / max(1, $prev) * 100;
-
         $sign = $change >= 0 ? '+' : '';
 
-        return sprintf('%s%.0f%% since last month', $sign, $change);
+        return sprintf('%s%.1f%% from last period', $sign, $change);
+    }
+
+    /**
+     * Generate rank-specific description with percentage of total
+     */
+    protected function generateRankDescription(int $count, int $total, string $category): string
+    {
+        if ($total === 0) {
+            return 'No rankings yet';
+        }
+
+        $percentage = ($count / $total) * 100;
+        return sprintf('%.1f%% of all %s', $percentage, $category);
     }
 }

@@ -19,23 +19,29 @@ class AdminStatsOverviewWidget extends BaseWidget
         $total = $userCount + $studentCount;
 
         return [
-            Stat::make('Total Accounts', $total)
-                ->icon('heroicon-s-users')
+            Stat::make('Total Accounts', number_format($total))
+                ->icon('heroicon-o-users')
+                ->color('primary')
                 ->chart($this->generateSparkline($total))
-                ->chartColor('success')
-                ->description($this->generateDescription($this->generateSparkline($total))),
+                ->chartColor('primary')
+                ->description($this->generateDescription($this->generateSparkline($total)))
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
 
-            Stat::make('User Accounts', $userCount)
-                ->icon('heroicon-s-user')
+            Stat::make('Admin Users', number_format($userCount))
+                ->icon('heroicon-o-shield-check')
+                ->color('success')
                 ->chart($this->generateSparkline($userCount))
-                ->chartColor('info')
-                ->description($this->generateDescription($this->generateSparkline($userCount))),
+                ->chartColor('success')
+                ->description($this->generateDescription($this->generateSparkline($userCount)))
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
 
-            Stat::make('Student Accounts', $studentCount)
-                ->icon('heroicon-s-academic-cap')
+            Stat::make('Students', number_format($studentCount))
+                ->icon('heroicon-o-academic-cap')
+                ->color('info')
                 ->chart($this->generateSparkline($studentCount))
-                ->chartColor('warning')
-                ->description($this->generateDescription($this->generateSparkline($studentCount))),
+                ->chartColor('info')
+                ->description($this->generateDescription($this->generateSparkline($studentCount)))
+                ->descriptionIcon('heroicon-m-arrow-trending-up'),
         ];
     }
 
@@ -61,8 +67,7 @@ class AdminStatsOverviewWidget extends BaseWidget
     }
 
     /**
-     * Generate a short description showing percent change between the last two
-     * sparkline points and a small icon indicator.
+     * Generate a modern description showing growth trend.
      *
      * @param array<string,int> $sparkline
      * @return string
@@ -70,18 +75,16 @@ class AdminStatsOverviewWidget extends BaseWidget
     protected function generateDescription(array $sparkline): string
     {
         $values = array_values($sparkline);
-
         $last = array_pop($values);
         $prev = array_pop($values) ?? 0;
 
         if ($prev === 0) {
-            return 'No previous data';
+            return 'Baseline measurement';
         }
 
         $change = ($last - $prev) / max(1, $prev) * 100;
-
         $sign = $change >= 0 ? '+' : '';
 
-        return sprintf('%s%.0f%% since last month', $sign, $change);
+        return sprintf('%s%.1f%% from last period', $sign, $change);
     }
 }
