@@ -76,9 +76,7 @@ Key Tables
 * certificates - Generated certificates tracking
 
 # TASKS #
-1. Update the create and edit pages to a clean and modern design. Similar to the create and edit of the student and users in the admin panel.
-2. Edit these resources: Create and Edit Evaluations, Organizations, Roles, Permissions.
-3. Make the navbar for admin pannel collapsible
+1. For the peer evaluator section, please make the displayed name smaller.
 
 # NOTES #
 1. Make sure to use only filament. No using custom blade files.
