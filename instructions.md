@@ -76,7 +76,8 @@ Key Tables
 * certificates - Generated certificates tracking
 
 # TASKS #
-1. For the peer evaluator section, please make the displayed name smaller.
+1. Update the css of the Evaluation List to match the shadow, border radius, and border color of the filament tables.
+2. Update the landing page to the design og the pasted image. It has a similar lcolors to the filament's light mode page. The images used in the pasted image are the psgears.png (used in the navbar and serves as the title) and spup.png (the logo displayed beside the title)
+
 
 # NOTES #
-1. Make sure to use only filament. No using custom blade files.

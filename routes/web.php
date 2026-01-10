@@ -13,12 +13,12 @@ Route::get('/dashboard', function () {
     if (Auth::guard('student')->check()) {
         return redirect('/student');
     }
-    
+
     // If admin is logged in, redirect to Filament admin panel
     if (Auth::guard('web')->check()) {
         return redirect('/admin');
     }
-    
+
     // If no one is logged in, redirect to welcome
     return redirect('/');
 })->middleware(['auth:web,student'])->name('dashboard');

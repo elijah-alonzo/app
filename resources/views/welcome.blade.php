@@ -4,106 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paulinian Student Government E-Portfolio and Ranking System</title>
-    <style>
-/* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", sans-serif;
-        }
-
-        body {
-            background: #ffffff;
-            color: #1d4826;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Header */
-        header {
-            width: 100%;
-            padding: 2rem 8%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        header .logo {
-            font-weight: 700;
-            letter-spacing: 1px;
-            font-size: 1.2rem;
-        }
-
-        header img {
-            width: 100%;
-            max-width: 300px;
-        }
-
-
-        /* Hero Section */
-        .hero {
-            text-align: left;
-            max-width: 1000px;
-            padding: 6rem 8%;
-            z-index: 2;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1d4826;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 span {
-            font-weight: 400;
-            color: #555;
-        }
-
-        .hero p {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #1d4826;
-            color: #fff;
-            padding: 0.9rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s ease;
-        }
-
-        .btn:hover {
-            color: #fac808;
-        }
-
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <div class="logo"><img src="images/logo.png"></div>
-    </header>
-    
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white px-8 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="{{ asset('images/psgears.png') }}" alt="PSG" class="h-10 w-auto">
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="/admin/login" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-full">Admin Login</a>
+                <a href="/student/login" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-full">Student Login</a>
+            </div>
+        </div>
+    </nav>
 
-    <main>
-        <section class="hero">
-            <h1>Paulinian Student Government</h1>
-            <h2>E-Portfolio and Ranking System</h2>
-            <p>Your official digital hub for tracking all Paulinian Student Government achievements, contributions, and performance rankings.</p>
-            <a href="/admin/login" class="btn">Admin Login</a>
-            <a href="/student/login" class="btn">Student Login</a>
-            <a style="color:white;">Made by Elijah</a>
-        </section>
-    </main>
+    <!-- Main Content -->
+    <div class="flex items-center justify-between max-w-7xl mx-auto px-8 py-20">
+        <!-- Left Content -->
+        <div class="flex-1 max-w-2xl">
+
+            <!-- Title Image instead of text -->
+            <div class="mb-8">
+                <img src="{{ asset('images/psgears.png') }}" alt="E-Portfolio & Ranking System" class="h-36 w-auto mb-4">
+            </div>
+
+            <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                The official digital hub of the Paulinian Student Government for evaluating performance and recognizing outstanding student officers.
+            </p>
+        </div>
+
+        <!-- Right Content - Large Logo -->
+        <div class="flex-1 flex justify-center">
+            <div class="relative">
+                <img src="{{ asset('images/psg.png') }}" alt="St. Paul University Philippines" class="h-96 w-auto rounded-full">
+            </div>
+        </div>
+    </div>
 
 
 </body>

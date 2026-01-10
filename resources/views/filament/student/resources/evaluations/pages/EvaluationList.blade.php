@@ -1,22 +1,30 @@
 <x-filament-panels::page layout="top">
 	<style>
-			.evaluation-table {
-				width: 100%;
-				border-collapse: collapse;
-				background: #fff;
-				border-radius: 1rem;
-				overflow: hidden;
-				box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-				border: 2px solid #878787ff;
-			}
+		.evaluation-table {
+			width: 100%;
+			border-radius: 25%;
+            border: 1px solid rgb(209 213 219);
+		}
 		.evaluation-table th, .evaluation-table td {
-			padding: 1rem;
+			padding: 0.75rem 1rem;
 			text-align: left;
-			border-bottom: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+			border-bottom: 1px solid rgb(209 213 219);
 		}
 		.evaluation-table th {
-			background: #f3f4f6;
 			font-weight: 600;
+            color: #22c55e;
+			font-size: 0.875rem;
+			border-bottom: 1px solid rgb(209 213 219);
+		}
+		.evaluation-table tbody tr {
+			border-bottom: 1px solid rgb(209 213 219);
+		}
+		.evaluation-table .evaluatee-name {
+			font-weight: 400;
+		}
+		.evaluation-table .org-name {
+			font-weight: 400;
 		}
 		.evaluation-avatar {
 			width: 64px;
@@ -25,9 +33,6 @@
 			background: #f3f3f3;
 			object-fit: cover;
 			display: block;
-		}
-		.evaluation-table tr:last-child td {
-			border-bottom: none;
 		}
 	</style>
 		@if($tasks->isEmpty())
@@ -58,10 +63,10 @@
 						@foreach($tasks as $task)
 						<tr>
 							<td>
-								<span class="font-semibold text-gray-900 dark:text-white">{{ $task['target_name'] }}</span>
+								<span class="evaluatee-name">{{ $task['target_name'] }}</span>
 							</td>
 							<td>
-								<span class="text-gray-500 dark:text-gray-400">{{ $task['organization_name'] }}</span>
+								<span class="org-name">{{ $task['organization_name'] }}</span>
 							</td>
 							<td>
 								<x-filament::badge
