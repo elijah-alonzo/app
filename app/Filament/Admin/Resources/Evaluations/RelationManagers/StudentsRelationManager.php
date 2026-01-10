@@ -9,6 +9,7 @@ use App\Models\Evaluation;
 use App\Filament\Admin\Resources\Evaluations\EvaluationResource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Actions\AttachAction;
 use Filament\Actions\DetachAction;
@@ -106,10 +107,6 @@ class StudentsRelationManager extends RelationManager
             $this->getEditAction(),
             $this->getDetachAction(),
         ];
-            // Only show Assign Peer Evaluatees in edit evaluation page
-            if ($this->pageClass === \App\Filament\Admin\Resources\Evaluations\Pages\EditEvaluation::class) {
-                array_unshift($actions, $this->createPeerAssignmentAction());
-            }
             // In view evaluation page, show Evaluate button
             if ($this->pageClass === \App\Filament\Admin\Resources\Evaluations\Pages\ViewEvaluation::class) {
                 array_unshift($actions, $this->getDirectEvaluationAction());
@@ -179,11 +176,10 @@ class StudentsRelationManager extends RelationManager
                 $this->assignPeerEvaluatees($record->id, $data['peer_evaluatees']);
             })
             ->modalHeading(fn ($record) => 'Assign Peer Evaluatees for ' . $record->name)
-            ->modalDescription('Select which students this person will evaluate as a peer. Already assigned evaluatees are checked. You may assign any number of evaluatees.')
             ->modalWidth('lg');
     }
 
-    // Edit action for student position
+    // Combined Edit action for student position and peer evaluator assignment
     protected function getEditAction(): EditAction
     {
         return EditAction::make()
@@ -191,8 +187,60 @@ class StudentsRelationManager extends RelationManager
                 TextInput::make('position')
                     ->label('Position')
                     ->required()
-                    ->maxLength(255),
-            ]);
+                    ->maxLength(255)
+                    ->prefixIcon('heroicon-m-identification'),
+
+                CheckboxList::make('peer_evaluatees')
+                    ->label('Select Peer Evaluatees')
+                    ->options(function ($record) {
+                        // Get all students in the organization except the current student (evaluator)
+                        $allStudentIds = $this->ownerRecord->students()
+                            ->where('students.id', '!=', $record->id)
+                            ->pluck('students.id')
+                            ->toArray();
+
+                        $alreadyAssignedIds = EvaluationPeerEvaluator::where('evaluation_id', $this->ownerRecord->id)
+                            ->whereIn('evaluatee_student_id', $allStudentIds)
+                            ->where('evaluator_student_id', '!=', $record->id)
+                            ->pluck('evaluatee_student_id')
+                            ->toArray();
+
+                        // Get students not already assigned as evaluatees to another evaluator
+                        $eligibleIds = array_diff($allStudentIds, $alreadyAssignedIds);
+
+                        // Always include students already assigned to this evaluator (for editing)
+                        $currentAssignedIds = EvaluationPeerEvaluator::where('evaluation_id', $this->ownerRecord->id)
+                            ->where('evaluator_student_id', $record->id)
+                            ->pluck('evaluatee_student_id')
+                            ->toArray();
+
+                        $finalIds = array_unique(array_merge($eligibleIds, $currentAssignedIds));
+
+                        return $this->ownerRecord->students()
+                            ->whereIn('students.id', $finalIds)
+                            ->pluck('name', 'students.id')
+                            ->toArray();
+                    })
+                    ->default(function ($record) {
+                        return EvaluationPeerEvaluator::where('evaluation_id', $this->ownerRecord->id)
+                            ->where('evaluator_student_id', $record->id)
+                            ->pluck('evaluatee_student_id')
+                            ->toArray();
+                    })
+                    ->columns(2)
+            ])
+            ->action(function ($record, $data) {
+                // Update student position
+                $record->pivot->update(['position' => $data['position']]);
+
+                // Update peer evaluator assignments
+                if (isset($data['peer_evaluatees'])) {
+                    $this->assignPeerEvaluatees($record->id, $data['peer_evaluatees']);
+                }
+            })
+            ->modalHeading(fn ($record) => 'Edit ' . $record->name)
+            ->modalDescription('Update student details and peer evaluation assignments')
+            ->modalWidth('lg');
     }
 
     // Detach action to remove student
