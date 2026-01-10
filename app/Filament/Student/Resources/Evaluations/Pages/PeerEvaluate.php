@@ -15,7 +15,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 /**
  * Peer Evaluation Page for Students
- * 
+ *
  * Allows students to complete peer evaluations using the same evaluation sheet layout
  */
 class PeerEvaluate extends Page implements HasForms
@@ -86,8 +86,17 @@ class PeerEvaluate extends Page implements HasForms
     public function getSubheading(): string|Htmlable|null
     {
         $orgName = $this->organization->name ?? 'Organization';
-        $yearRange = $this->evaluation->year . '-' . ($this->evaluation->year + 1);
-        return "Organization: {$orgName} ({$yearRange})";
+        $year = $this->evaluation->year ?? null;
+
+        if ($year && is_numeric($year)) {
+            $yearRange = intval($year) . '-' . (intval($year) + 1);
+        } elseif ($year) {
+            $yearRange = $year;
+        } else {
+            $yearRange = 'Unknown Year';
+        }
+
+        return "Organization: {$orgName} {$yearRange}";
     }
 
     /**

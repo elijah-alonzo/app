@@ -10,20 +10,20 @@
                     {{-- Table Header --}}
                     <thead>
                         <tr>
-                            <th class="border border-gray-400 bg-gray-100 px-4 py-3 text-left font-bold text-lg">
+                            <th style="border: 1px solid #9CA3AF; padding: 12px 16px; text-align: left; font-weight: bold; font-size: 18px;">
                                 Performance Indicators
                             </th>
-                            <th class="border border-gray-400 bg-gray-100 px-3 py-3 text-center font-bold w-16">
-                                3 (E)
+                            <th style="border: 1px solid #9CA3AF; padding: 12px; text-align: center; font-weight: bold; width: 64px;">
+                                3
                             </th>
-                            <th class="border border-gray-400 bg-gray-100 px-3 py-3 text-center font-bold w-16">
-                                2 (M)
+                            <th style="border: 1px solid #9CA3AF; padding: 12px; text-align: center; font-weight: bold; width: 64px;">
+                                2
                             </th>
-                            <th class="border border-gray-400 bg-gray-100 px-3 py-3 text-center font-bold w-16">
-                                1 (S)
+                            <th style="border: 1px solid #9CA3AF; padding: 12px; text-align: center; font-weight: bold; width: 64px;">
+                                1
                             </th>
-                            <th class="border border-gray-400 bg-gray-100 px-3 py-3 text-center font-bold w-16">
-                                0 (X)
+                            <th style="border: 1px solid #9CA3AF; padding: 12px; text-align: center; font-weight: bold; width: 64px;">
+                                0
                             </th>
                         </tr>
                     </thead>
@@ -35,42 +35,38 @@
                         @foreach($groupedQuestions as $domainName => $strands)
                             @if(!$loop->first)
                                 <tr>
-                                    <td colspan="5" class="h-5 border-none bg-transparent"></td>
+                                    <td colspan="5" style="height: 20px; border: none; background: transparent;"></td>
                                 </tr>
                             @endif
                             <tr>
-                                <td colspan="5" class="border border-gray-400 px-4 py-4">
-                                    <h4 class="text-xl font-bold text-emerald-800 m-0 leading-tight">
+                                <td colspan="5" style="border: 1px solid #9CA3AF; padding: 16px;">
+                                    <h4 style="font-size: 20px; font-weight: 700; color: #22C55E; margin: 0; line-height: 1.25; text-transform: uppercase; letter-spacing: 0.05em;">
                                         {{ $domainName }}
                                     </h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="border border-gray-400 px-4 py-3">
                                     <x-evaluation-domain-description :domain-name="$domainName" />
                                 </td>
                             </tr>
                             @foreach($strands as $strandName => $strandQuestions)
                                 <tr>
-                                    <td colspan="5" class="border border-gray-400 px-4 py-3">
-                                        <h6 class="text-base font-semibold text-emerald-800 m-0 leading-tight">
+                                    <td colspan="5" style="border: 1px solid #9CA3AF; padding: 12px 16px;">
+                                        <h6 style="font-size: 16px; font-weight: 600; color: #16A34A; margin: 0; line-height: 1.25; padding-left: 12px;">
                                             {{ $strandName }}
                                         </h6>
                                     </td>
                                 </tr>
                                 @foreach($strandQuestions as $questionKey => $questionText)
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="border border-gray-400 px-4 py-3 text-sm">
+                                    <tr>
+                                        <td style="border: 1px solid #9CA3AF; padding: 16px; font-size: 14px;">
                                             {{ $questionText }}
                                         </td>
                                         @for($score = 3; $score >= 0; $score--)
-                                            <td class="border border-gray-400 px-3 py-3 text-center">
-                                                <input 
-                                                    type="radio" 
-                                                    name="{{ $questionKey }}" 
+                                            <td style="border: 1px solid #9CA3AF; padding: 12px; text-align: center;">
+                                                <input
+                                                    type="radio"
+                                                    name="{{ $questionKey }}"
                                                     value="{{ $score }}"
                                                     wire:model="data.{{ $questionKey }}"
-                                                    class="w-4 h-4 text-yellow-600"
+                                                    style="width: 16px; height: 16px; accent-color: #22C55E;"
                                                     required
                                                     @if($this->evaluationRecord) disabled @endif
                                                 >

@@ -16,13 +16,13 @@ use Illuminate\Contracts\Support\Htmlable;
 
 /**
  * Self Evaluation Page for Students
- * 
+ *
  * Allows students to complete their self-evaluations using the same evaluation sheet layout
  */
 class SelfEvaluate extends Page implements HasForms
 {
     use InteractsWithForms, HandlesEvaluationForms;
-    
+
     protected static string $resource = EvaluationResource::class;
     protected string $view = 'filament.student.resources.evaluations.pages.SelfEvaluationSheet';
 
@@ -77,8 +77,17 @@ class SelfEvaluate extends Page implements HasForms
     public function getSubheading(): string|Htmlable|null
     {
         $orgName = $this->organization->name ?? 'Organization';
-        $yearRange = $this->evaluationEvent->year . '-' . ($this->evaluationEvent->year + 1);
-        return "Organization: {$orgName} ({$yearRange})";
+        $year = $this->evaluationEvent->year ?? null;
+
+        if ($year && is_numeric($year)) {
+            $yearRange = intval($year) . '-' . (intval($year) + 1);
+        } elseif ($year) {
+            $yearRange = $year;
+        } else {
+            $yearRange = 'Unknown Year';
+        }
+
+        return "Organization: {$orgName} {$yearRange}";
     }
 
     public function form(Schema $schema): Schema

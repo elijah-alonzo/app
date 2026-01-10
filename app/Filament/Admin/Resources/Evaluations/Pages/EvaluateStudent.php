@@ -82,8 +82,17 @@ class EvaluateStudent extends Page implements HasForms
     public function getSubheading(): string|Htmlable|null
     {
         $orgName = $this->evaluation->organization->name ?? 'Organization';
-        $yearRange = $this->evaluation->year;
-        return "Organization: {$orgName}{$this->evaluation->name} ({$yearRange})";
+        $year = $this->evaluation->year ?? null;
+
+        if ($year && is_numeric($year)) {
+            $yearRange = intval($year) . '-' . (intval($year) + 1);
+        } elseif ($year) {
+            $yearRange = $year;
+        } else {
+            $yearRange = 'Unknown Year';
+        }
+
+        return "Organization: {$orgName} {$yearRange}";
     }
 
     public function form(Schema $schema): Schema
