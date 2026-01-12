@@ -26,9 +26,11 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'User';
+    protected static ?string $modelLabel = 'Adviser';
 
-    protected static ?string $pluralModelLabel = 'Users';
+    protected static ?string $navigationLabel = 'Advisers';
+
+    protected static ?string $pluralModelLabel = 'Advisers';
 
     public static function canAccess(): bool
     {

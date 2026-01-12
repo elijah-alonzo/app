@@ -14,9 +14,5 @@ class CreateUser extends CreateRecord
         return $this->getResource()::getUrl('index');
     }
 
-    
-    public function getSubheading(): ?string
-    {
-        return 'Fill out the form to create a new user account in the system.';
-    }
+    protected ?string $heading = 'Create Adviser';
 }

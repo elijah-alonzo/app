@@ -15,69 +15,65 @@ class UserForm
     {
         return $schema
             ->components([
-                // Account Information Section
-                Section::make('Account Information')
-                    ->description('Manage user account details and organization settings')
+                // Adviser Information Section
+                Section::make('Adviser Information')
+                    ->description('Manage adviser account details and organization settings')
                     ->columnSpanFull()
-                    ->collapsible()
-                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
-                        // Full Name - Full Width
-                        TextInput::make('name')
-                            ->label('Name')
-                            ->required()
-                            ->maxLength(255)
-                            ->prefixIcon('heroicon-m-user')
-                            ->extraAttributes([
-                                'style' => 'font-size: 18px;'
-                            ])
-                            ->columnSpanFull(),
+                        Grid::make(2)
+                            ->schema([
+                                // Full Name
+                                TextInput::make('name')
+                                    ->label('Name')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->prefixIcon('heroicon-m-user')
+                                    ->extraAttributes([
+                                        'style' => 'font-size: 18px;'
+                                    ]),
 
-                        // School ID Number - Full Width
-                        TextInput::make('school_number')
-                            ->label('School ID Number')
-                            ->required()
-                            ->unique(ignoreRecord: true)
-                            ->maxLength(20)
-                            ->prefixIcon('heroicon-m-identification')
-                            ->extraAttributes([
-                                'style' => 'font-size: 16px;'
-                            ])
-                            ->columnSpanFull(),
+                                // School ID Number
+                                TextInput::make('school_number')
+                                    ->label('School ID Number')
+                                    ->required()
+                                    ->unique(ignoreRecord: true)
+                                    ->maxLength(20)
+                                    ->prefixIcon('heroicon-m-identification')
+                                    ->extraAttributes([
+                                        'style' => 'font-size: 16px;'
+                                    ]),
 
-                        // Email Address - Full Width
-                        TextInput::make('email')
-                            ->label('Email address')
-                            ->email()
-                            ->required()
-                            ->unique(ignoreRecord: true)
-                            ->maxLength(191)
-                            ->prefixIcon('heroicon-m-envelope')
-                            ->extraAttributes([
-                                'style' => 'font-size: 16px;'
-                            ])
-                            ->columnSpanFull(),
+                                // Email Address
+                                TextInput::make('email')
+                                    ->label('Email address')
+                                    ->email()
+                                    ->required()
+                                    ->unique(ignoreRecord: true)
+                                    ->maxLength(191)
+                                    ->prefixIcon('heroicon-m-envelope')
+                                    ->extraAttributes([
+                                        'style' => 'font-size: 16px;'
+                                    ]),
 
-                        // Roles - Full Width
-                        Select::make('roles')
-                            ->label('Roles')
-                            ->relationship('roles', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->searchable()
-                            ->prefixIcon('heroicon-m-user-group')
-                            ->placeholder('Select roles for this user')
-                            ->columnSpanFull(),
+                                // Roles
+                                Select::make('roles')
+                                    ->label('Roles')
+                                    ->relationship('roles', 'name')
+                                    ->multiple()
+                                    ->preload()
+                                    ->searchable()
+                                    ->prefixIcon('heroicon-m-user-group')
+                                    ->placeholder('Select roles for this user'),
 
-                        // Organization - Full Width
-                        Select::make('organization_id')
-                            ->label('Organization')
-                            ->relationship('organization', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->prefixIcon('heroicon-m-building-office')
-                            ->placeholder('Select organization')
-                            ->columnSpanFull(),
+                                // Organization
+                                Select::make('organization_id')
+                                    ->label('Organization')
+                                    ->relationship('organization', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->prefixIcon('heroicon-m-building-office')
+                                    ->placeholder('Select organization'),
+                            ]),
                     ])
                     ->extraAttributes([
                         'class' => 'mb-6'
@@ -87,8 +83,6 @@ class UserForm
                 Section::make('Security & Privacy')
                     ->description('Set up password for the user account')
                     ->columnSpanFull()
-                    ->collapsible()
-                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         Grid::make(2)
                             ->schema([

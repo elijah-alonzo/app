@@ -17,8 +17,5 @@ class ListUsers extends ListRecords
         ];
     }
 
-    public function getSubheading(): ?string
-    {
-        return 'Manage all users in the system';
-    }
+    protected ?string $heading = 'Advisers';
 }
