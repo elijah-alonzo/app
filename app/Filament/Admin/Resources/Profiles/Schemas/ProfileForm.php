@@ -53,15 +53,16 @@ class ProfileForm
                                         'style' => 'font-size: 16px;'
                                     ]),
 
-                                // Roles (Read Only)
-                                Select::make('roles')
-                                    ->label('Roles')
-                                    ->relationship('roles', 'name')
-                                    ->multiple()
-                                    ->preload()
+                                // Role (Read Only)
+                                Select::make('role')
+                                    ->label('Role')
+                                    ->options([
+                                        'admin' => 'Admin',
+                                        'adviser' => 'Adviser',
+                                    ])
                                     ->disabled()
                                     ->prefixIcon('heroicon-m-user-group')
-                                    ->placeholder('Select roles for this user'),
+                                    ->placeholder('Your assigned role'),
 
                                 // Organization (Read Only)
                                 Select::make('organization_id')

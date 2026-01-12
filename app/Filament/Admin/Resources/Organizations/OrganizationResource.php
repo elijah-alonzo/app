@@ -20,8 +20,7 @@ class OrganizationResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-building-office';
 
-    protected static string|UnitEnum|null $navigationGroup = 'System Settings';
-
+    protected static UnitEnum|string|null $navigationGroup = 'Council Management';
     protected static ?int $navigationSort = 10;
 
     protected static ?string $navigationLabel = 'Councils';

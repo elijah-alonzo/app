@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\Ranks\Pages\ViewRank;
 use App\Filament\Admin\Resources\Ranks\Tables\RanksTable;
 use App\Models\Rank;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
@@ -17,13 +18,15 @@ class RankResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-trophy';
 
+    protected static UnitEnum|string|null $navigationGroup = 'Council Management';
+
+    protected static ?int $navigationSort = 30;
+
     protected static ?string $navigationLabel = 'Rankings';
 
     protected static ?string $modelLabel = 'Rank';
 
     protected static ?string $pluralModelLabel = 'Rankings';
-
-    protected static ?int $navigationSort = 60; // Before Profile (70)
 
     protected static ?string $recordTitleAttribute = 'student.name';
 

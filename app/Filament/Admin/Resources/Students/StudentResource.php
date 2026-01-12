@@ -11,6 +11,7 @@ use App\Filament\Admin\Resources\Students\Schemas\StudentInfolist;
 use App\Filament\Admin\Resources\Students\Tables\StudentsTable;
 use App\Models\Student;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -24,6 +25,7 @@ class StudentResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-academic-cap';
 
+    protected static UnitEnum|string|null $navigationGroup = 'User Management';
     protected static ?int $navigationSort = 10;
 
     protected static ?string $recordTitleAttribute = 'name';

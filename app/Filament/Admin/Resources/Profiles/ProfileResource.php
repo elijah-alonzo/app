@@ -20,8 +20,7 @@ class ProfileResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';
 
     protected static ?string $navigationLabel = 'Account';
-
-    protected static ?int $navigationSort = 70;
+    protected static ?int $navigationSort = 100;
 
     public static function canViewAny(): bool
     {

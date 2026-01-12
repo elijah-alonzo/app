@@ -48,9 +48,8 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->navigationGroups([
-                NavigationGroup::make()
-                    ->label('Admin Settings')
-                    ->collapsible(),
+                NavigationGroup::make('User Management')->label('User Management'),
+                NavigationGroup::make('Council Management')->label('Council Management'),
             ])
             ->collapsibleNavigationGroups(false)
 

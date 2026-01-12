@@ -14,6 +14,7 @@ use App\Filament\Admin\Resources\Evaluations\Tables\EvaluationsTable;
 use App\Models\Evaluation;
 use App\Models\EvaluationPeerEvaluator;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,6 +27,10 @@ use Illuminate\Support\Facades\Storage;
 
 class EvaluationResource extends Resource
 {
+    protected static UnitEnum|string|null $navigationGroup = 'Council Management';
+
+    protected static ?int $navigationSort = 20;
+
     public static function infolist(Schema $schema): Schema
     {
         return $schema->components([
@@ -143,8 +148,6 @@ class EvaluationResource extends Resource
     protected static ?string $model = Evaluation::class;
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clipboard-document-check';
-
-    protected static ?int $navigationSort = 30;
 
     protected static ?string $navigationLabel = 'Evaluations';
 

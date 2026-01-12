@@ -56,14 +56,15 @@ class UserForm
                                     ]),
 
                                 // Roles
-                                Select::make('roles')
-                                    ->label('Roles')
-                                    ->relationship('roles', 'name')
-                                    ->multiple()
-                                    ->preload()
-                                    ->searchable()
+                                Select::make('role')
+                                    ->label('Role')
+                                    ->options([
+                                        'admin' => 'Admin',
+                                        'adviser' => 'Adviser',
+                                    ])
+                                    ->required()
                                     ->prefixIcon('heroicon-m-user-group')
-                                    ->placeholder('Select roles for this user'),
+                                    ->placeholder('Select role for this user'),
 
                                 // Organization
                                 Select::make('organization_id')
