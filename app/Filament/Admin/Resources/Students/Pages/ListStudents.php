@@ -16,10 +16,4 @@ class ListStudents extends ListRecords
             CreateAction::make(),
         ];
     }
-
-    public function getSubheading(): ?string
-    {
-        return 'Manage all student accounts in the system';
-    }
-
 }

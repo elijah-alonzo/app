@@ -27,8 +27,6 @@ class StudentForm
                 Section::make('Account Information')
                     ->description('Manage student profile details and personal information')
                     ->columnSpanFull()
-                    ->collapsible()
-                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         Grid::make(2)
                             ->schema([
@@ -107,8 +105,6 @@ class StudentForm
                 Section::make('Security & Privacy')
                     ->description('Set up password for the student account')
                     ->columnSpanFull()
-                    ->collapsible()
-                    ->collapsed(fn (string $operation): bool => $operation === 'edit')
                     ->schema([
                         Grid::make(1)
                             ->schema([
@@ -134,7 +130,6 @@ class StudentForm
                                             ->dehydrated(false)
                                             ->prefixIcon('heroicon-m-shield-check')
                                             ->placeholder('Repeat password')
-                                            ->visible(fn (string $operation): bool => $operation === 'create' || filled(request()->input('data.password')))
                                             ->revealable(),
                                     ]),
                             ])
