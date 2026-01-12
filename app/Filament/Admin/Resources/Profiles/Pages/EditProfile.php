@@ -10,7 +10,7 @@ class EditProfile extends EditRecord
 {
     protected static string $resource = ProfileResource::class;
 
-    protected static ?string $title = 'Edit Profile';
+    protected static ?string $title = 'My Account';
 
     protected function getHeaderActions(): array
     {
