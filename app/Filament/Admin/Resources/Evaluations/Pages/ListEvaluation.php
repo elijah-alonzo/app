@@ -16,10 +16,4 @@ class ListEvaluation extends ListRecords
             CreateAction::make(),
         ];
     }
-
-    public function getSubheading(): ?string
-    {
-        return 'Manage all evaluations for organizations.';
-    }
-
 }

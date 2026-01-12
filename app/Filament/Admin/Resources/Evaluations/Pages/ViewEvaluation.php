@@ -48,9 +48,4 @@ class ViewEvaluation extends ViewRecord
     {
         return $this->getResource()::infolist(app(\Filament\Schemas\Schema::class))->render($this->record);
     }
-
-        public function getSubheading(): ?string
-    {
-        return 'Manage the evaluation details of the associated students.';
-    }
 }
