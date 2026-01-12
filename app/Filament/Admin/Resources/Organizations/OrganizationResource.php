@@ -24,11 +24,11 @@ class OrganizationResource extends Resource
 
     protected static ?int $navigationSort = 10;
 
-    protected static ?string $navigationLabel = 'Organizations';
+    protected static ?string $navigationLabel = 'Councils';
 
-    protected static ?string $modelLabel = 'Organization';
+    protected static ?string $modelLabel = 'Council';
 
-    protected static ?string $pluralModelLabel = 'Organizations';
+    protected static ?string $pluralModelLabel = 'Councils';
 
     protected static ?string $recordTitleAttribute = 'name';
 

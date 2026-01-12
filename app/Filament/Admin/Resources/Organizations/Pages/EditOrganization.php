@@ -23,9 +23,5 @@ class EditOrganization extends EditRecord
         ];
     }
 
-    
-    public function getSubheading(): ?string
-    {
-        return 'Fill out the form to update the organization information.';
-    }
+    protected ?string $heading = 'Edit Council';
 }

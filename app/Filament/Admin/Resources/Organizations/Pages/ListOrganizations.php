@@ -17,8 +17,5 @@ class ListOrganizations extends ListRecords
         ];
     }
 
-    public function getSubheading(): ?string
-    {
-        return 'Manage all organizations in the system';
-    }
+    protected ?string $heading = 'Councils';
 }
